@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { Link, useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';  // Import bcrypt for password comparison
+import './Login.css'; // Custom CSS file for styling
+import logo from '../images/white_logo.jpg'; // Path to the logo image
 
-const Login = () => {
+
+const Login = ({ onLogin }) => {  // Accept onLogin prop from App.js
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -54,8 +57,8 @@ const Login = () => {
 
             if (passwordMatch) {
                 alert('Login successful!');
-                // Redirect or proceed to the next step (e.g., navigate to a dashboard)
-                navigate('/dashboard');
+                onLogin();  // Call onLogin to change the app state to logged in
+                navigate('/logged-home'); // Redirect to the logged-in home page
             } else {
                 alert('Invalid login credentials.');
             }
@@ -66,24 +69,30 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="email"
-                    placeholder="Email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button type="submit">Login</button>
+        <div className="login-container">
+
+            <form className="login-form" onSubmit={handleLogin}>
+                <img src={logo} alt="IB Math Visualizer Logo" className="logo" />
+                <h2>Login</h2>
+                <div className="form-group">
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit" className="login-btn">Login</button>
+                <Link to="/role-selection" className="signup-link">Do not have an account? Signup</Link>
             </form>
-            <Link to="/role-selection">Do not have an account? Signup</Link>
         </div>
     );
 };

@@ -1,16 +1,21 @@
 import { useState } from 'react';
 import { supabase } from '../supabaseClient';
 import bcrypt from 'bcryptjs';  // Import bcryptjs for hashing passwords
-import { student_code } from '../passcodes';  // Import the student code
+import { student_code } from '../passcodes';
+import { Link, useNavigate } from "react-router-dom";  // Import the student code
+import './SignupStudent.css'; // Add custom CSS file for styling
+import logo from '../images/white_logo.jpg'; // Path to the logo image
 
 const SignupStudent = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [englishName, setEnglishName] = useState('');
     const [lastName, setLastName] = useState('');
     const [group, setGroup] = useState('DP1 AA HL');  // Default group
     const [subjectTeacher, setSubjectTeacher] = useState('Mr. Vega');  // Default subject teacher
     const [enteredStudentCode, setEnteredStudentCode] = useState('');  // Student code input
+    const navigate = useNavigate();
 
     const handleSignup = async (e) => {
         e.preventDefault();
@@ -18,6 +23,11 @@ const SignupStudent = () => {
         // Check if the entered student code matches the predefined code
         if (enteredStudentCode !== student_code) {
             alert('Invalid student code. Please try again.');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match.');
             return;
         }
 
@@ -43,7 +53,7 @@ const SignupStudent = () => {
                 alert(error.message);
             } else {
                 alert('Registration successful.');
-                // You can redirect the user to the login page or a dashboard after registration
+                navigate('/login');
             }
         } catch (err) {
             console.error('Error hashing password:', err);
@@ -51,39 +61,58 @@ const SignupStudent = () => {
     };
 
     return (
-        <div>
-            <h1>Student Signup</h1>
-            <form onSubmit={handleSignup}>
-                <input
-                    type="text"
-                    placeholder="Student Code"
-                    onChange={(e) => setEnteredStudentCode(e.target.value)}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="English Name"
-                    onChange={(e) => setEnglishName(e.target.value)}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Last Name (Pinyin)"
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
+        <div className="signup-container">
+            <form className="signup-form" onSubmit={handleSignup}>
+                <img src={logo} alt="IB Math Visualizer Logo" className="logo" />
+                <h2>Student Signup</h2>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        placeholder="Student Code"
+                        onChange={(e) => setEnteredStudentCode(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        placeholder="English Name"
+                        onChange={(e) => setEnglishName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="text"
+                        placeholder="Last Name (Pinyin)"
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="password"
+                        placeholder="Confirm Password"
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                    />
+                </div>
                 <label>
                     Choose Group:
                     <select value={group} onChange={(e) => setGroup(e.target.value)}>
@@ -104,7 +133,8 @@ const SignupStudent = () => {
                         <option value="Mr. Orozco">Mr. Orozco</option>
                     </select>
                 </label>
-                <button type="submit">Sign Up</button>
+                <button type="submit" className="signup-btn">Sign Up</button>
+                <Link to="/login" className="login-link">Already have an account? Login</Link>
             </form>
         </div>
     );

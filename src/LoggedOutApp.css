@@ -1,0 +1,37 @@
+/* Container for the navigation bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #00AA99;  /* Soft background color */
+    border-bottom: 2px solid #ccc; /* Optional bottom border */
+}
+
+/* Left-aligned navigation item (Home button) */
+.navbar-left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Right-aligned navigation item (Login/Register button) */
+.navbar-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Common styling for nav buttons */
+.nav-button {
+    background-color: #007777; /* Initial button color */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;  /* Smooth hover effect */
+}
+
+/* Hover effect for nav buttons (darker shade) */
+.nav-button:hover {
+    background-color: #004d4d;  /* Darker color on hover */
+}
