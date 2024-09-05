@@ -1,0 +1,1 @@
+export const student_code = "STUDENT12345";  // Predefined student code
