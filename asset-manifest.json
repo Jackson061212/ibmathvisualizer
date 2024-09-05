@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ibmathvisualizer/static/css/main.ea54afd7.css",
-    "main.js": "/ibmathvisualizer/static/js/main.3ded56a4.js",
+    "main.js": "/ibmathvisualizer/static/js/main.64122750.js",
     "static/js/289.d68795f3.chunk.js": "/ibmathvisualizer/static/js/289.d68795f3.chunk.js",
     "index.html": "/ibmathvisualizer/index.html",
     "main.ea54afd7.css.map": "/ibmathvisualizer/static/css/main.ea54afd7.css.map",
-    "main.3ded56a4.js.map": "/ibmathvisualizer/static/js/main.3ded56a4.js.map",
+    "main.64122750.js.map": "/ibmathvisualizer/static/js/main.64122750.js.map",
     "289.d68795f3.chunk.js.map": "/ibmathvisualizer/static/js/289.d68795f3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ea54afd7.css",
-    "static/js/main.3ded56a4.js"
+    "static/js/main.64122750.js"
   ]
 }
