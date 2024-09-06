@@ -53,7 +53,7 @@ const SignupStudent = () => {
                 alert(error.message);
             } else {
                 alert('Registration successful.');
-                navigate('/login');
+                navigate('/ibmathvisualizer/login');
             }
         } catch (err) {
             console.error('Error hashing password:', err);
@@ -134,7 +134,7 @@ const SignupStudent = () => {
                     </select>
                 </label>
                 <button type="submit" className="signup-btn">Sign Up</button>
-                <Link to="/login" className="login-link">Already have an account? Login</Link>
+                <Link to="/ibmathvisualizer/login" className="login-link">Already have an account? Login</Link>
             </form>
         </div>
     );

@@ -21,6 +21,7 @@ function App() {
             <>
                 {isLoggedIn ? (
                     <LoggedInApp handleLogout={handleLogout} />
+
                 ) : (
                     <>
                         <LoggedOutApp onLogin={handleLogin} />
@@ -29,12 +30,12 @@ function App() {
             </>
 
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/ibmathvisualizer" element={<Home />} />
                 {/*<Route path="/login" element={<Login />} />*/}
-                <Route path="/role-selection" element={<RoleSelection />} />
-                <Route path="/signup-student" element={<SignupStudent />} />
-                <Route path="/signup-teacher" element={<SignupTeacher />} />
-                <Route path="/logged-home" element={<LoggedHome />} />
+                <Route path="/ibmathvisualizer/role-selection" element={<RoleSelection />} />
+                <Route path="/ibmathvisualizer/signup-student" element={<SignupStudent />} />
+                <Route path="/ibmathvisualizer/signup-teacher" element={<SignupTeacher />} />
+                <Route path="/ibmathvisualizer/logged-home" element={<LoggedHome />} />
             </Routes>
 
         </BrowserRouter>

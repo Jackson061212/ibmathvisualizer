@@ -6,15 +6,15 @@ const LoggedInApp = ({ handleLogout }) => {
 
     const handleLogoutAndNavigate = () => {
         handleLogout();               // Update login state in App.js
-        navigate("/");                // Redirect to home page (Home.js)
+        navigate("/ibmathvisualizer");                // Redirect to home page (Home.js)
     };
 
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <Link to="/logged-home" className="nav-button">Home</Link>
-                <Link to="/tasks" className="nav-button">Tasks</Link>
-                <Link to="/statistics" className="nav-button">Statistics</Link>
+                <Link to="/ibmathvisualizer/logged-home" className="nav-button">Home</Link>
+                <Link to="/ibmathvisualizer/tasks" className="nav-button">Tasks</Link>
+                <Link to="/ibmathvisualizer/statistics" className="nav-button">Statistics</Link>
             </div>
             <div className="navbar-right">
                 <button onClick={handleLogoutAndNavigate} className="nav-button">Logout</button> {/* Handle logout and navigation */}

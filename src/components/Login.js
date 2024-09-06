@@ -27,7 +27,7 @@ const Login = ({ onLogin }) => {  // Accept onLogin prop from App.js
                     alert('Email verification failed: ' + error.message);
                 } else {
                     alert('Email verified successfully!');
-                    navigate('/');  // Redirect to home or dashboard after verification
+                    navigate('/ibmathvisualizer');  // Redirect to home or dashboard after verification
                 }
             }
         };
@@ -58,7 +58,7 @@ const Login = ({ onLogin }) => {  // Accept onLogin prop from App.js
             if (passwordMatch) {
                 alert('Login successful!');
                 onLogin();  // Call onLogin to change the app state to logged in
-                navigate('/logged-home'); // Redirect to the logged-in home page
+                navigate('/ibmathvisualizer/logged-home'); // Redirect to the logged-in home page
             } else {
                 alert('Invalid login credentials.');
             }
@@ -91,7 +91,7 @@ const Login = ({ onLogin }) => {  // Accept onLogin prop from App.js
                     />
                 </div>
                 <button type="submit" className="login-btn">Login</button>
-                <Link to="/role-selection" className="signup-link">Do not have an account? Signup</Link>
+                <Link to="/ibmathvisualizer/role-selection" className="signup-link">Do not have an account? Signup</Link>
             </form>
         </div>
     );

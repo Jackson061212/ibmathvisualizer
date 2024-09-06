@@ -48,7 +48,7 @@ const TeacherRegistration = () => {
             }
 
             alert('Registration successful! You can now log in.');
-            navigate('/login');  // Redirect to login page after successful registration
+            navigate('/ibmathvisualizer/login');  // Redirect to login page after successful registration
         } catch (err) {
             console.error('Error during registration:', err);
             alert('An error occurred. Please try again.');
@@ -85,7 +85,7 @@ const TeacherRegistration = () => {
                 />
                 <button type="submit">Register</button>
             </form>
-            <Link to="/login">Already have an account? Login</Link>
+            <Link to="/ibmathvisualizer/login">Already have an account? Login</Link>
         </div>
     );
 };

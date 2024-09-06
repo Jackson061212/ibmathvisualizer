@@ -8,13 +8,13 @@ const RoleSelection = () => {
         <div className="role-selection-container">
             <h1>Register as...</h1>
             <div className="roles-container">
-                <Link to="/signup-student" className="role-option">
+                <Link to="/ibmathvisualizer/signup-student" className="role-option">
                     <div className="role-circle">
                         <img src={studentImg} alt="Student" className="role-img" />
                     </div>
                     <p>Student</p>
                 </Link>
-                <Link to="/signup-teacher" className="role-option">
+                <Link to="/ibmathvisualizer/signup-teacher" className="role-option">
                     <div className="role-circle">
                         <img src={teacherImg} alt="Teacher" className="role-img" />
                     </div>
