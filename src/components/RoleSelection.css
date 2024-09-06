@@ -19,7 +19,7 @@
 .roles-container {
     display: flex;
     justify-content: space-around;
-    width: 35%; /* Adjust width for spacing between roles */
+    width: 45%; /* Adjust width for spacing between roles */
 }
 
 /* Styling each role option */
