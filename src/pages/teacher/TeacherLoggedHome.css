@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Dimmed background */
+    background: rgba(0, 0, 0, 0.5); /* 50% opacity*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,13 +12,27 @@
 
 .popup {
     background: white;
-    padding: 20px; /* Adjusted padding for better layout */
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);  /*20%*/
     position: relative;
-    width: 600px; /* Fixed width */
-    max-height: 80vh; /* Fixed height with a maximum height */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
+    width: 600px;
+    max-height: 80vh;
+    overflow-y: auto; /* enable vertical scrolling if content exceeds the height */
+}
+
+.create-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+.create-button:hover {
+    background-color: #0056b3
 }
 
 .close-button {
@@ -31,29 +45,28 @@
     cursor: pointer;
 }
 
-/* New CSS for question boxes */
 .question-box {
-    background: #f9f9f9; /* Light shaded background */
-    border: 1px solid #ddd; /* Light border */
+    background: #f9f9f9;
+    border: 1px solid #ddd;
     border-radius: 5px;
-    padding: 15px; /* Padding inside the question box */
-    margin-bottom: 15px; /* Spacing between question boxes */
+    padding: 15px;
+    margin-bottom: 15px;
 }
 
-/* Align labels to the left */
+/* align labels to the left */
 label {
     display: block;
     margin: 10px 0; /* Space around labels */
 }
 
-/* Ensuring all input fields align left */
+/* ensuring all input fields align left */
 input[type="text"],
 input[type="number"],
 select {
-    width: calc(100% - 10px); /* Adjust width to make it full width, minus some space */
-    padding: 5px; /* Adding padding for better appearance */
+    width: calc(100% - 10px); /* make it full width, minus some space */
+    padding: 5px;
 }
 
 .question-section label {
-    /* Default styles for question labels can be adjusted here if necessary */
+    /*TODO*/
 }

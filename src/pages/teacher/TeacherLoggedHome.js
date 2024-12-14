@@ -13,13 +13,14 @@ const TeacherLoggedHome = ({ userId }) => {
         setPopupOpen(false);
     };
 
+    //TODO: add more information on this page
     return (
         <div>
             <h1>Welcome Back!</h1>
             <p>This is the logged-in homepage for TEACHERS</p>
-            <button onClick={openPopup}>Create Task</button>
+            <button className="create-button" onClick={openPopup}>Create Task</button>
 
-            {/* Pass userId directly to the CreateNewTask component */}
+            {/* pass userId directly to the CreateNewTask component */}
             <TeacherLoggedHome_CreateNewTask
                 isOpen={isPopupOpen}
                 onClose={closePopup}

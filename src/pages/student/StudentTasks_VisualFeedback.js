@@ -10,18 +10,20 @@ import {
     Legend,
 } from 'chart.js';
 import './StudentTasks_CompleteNewTask.css';
-import { supabase } from '../../supabaseClient'; // Assuming you have a supabase client set up
+import { supabase } from '../../supabaseClient';
 
-// Register Chart.js components
+// register Chart.js components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const StudentTasks_VisualFeedback = ({ data, taskId, onClose }) => {
     console.log("VisualFeedback data: ", data)
     const chartRef = useRef(null); // Reference to the chart
 
-    // Prepare data for the Bar chart
+    // TODO: MAKE bar chart INTO radar graph. Curr bar chart is for testing, NOT final
+    // prep data for bar chart
+    // ! THE code in chartData and chartOptions are PROVIDED FROM ChatGPT
     const chartData = {
-        labels: data.map((item) => `Q${item.question_number}`),
+        labels: data.map((item) => `Q${item.question_number}`), // turn data into string labels Q1, Q2, ...
         datasets: [
             {
                 label: 'Scores',
@@ -33,6 +35,7 @@ const StudentTasks_VisualFeedback = ({ data, taskId, onClose }) => {
         ],
     };
 
+    // Understood from: https://www.chartjs.org/docs/latest/getting-started/usage.html
     const chartOptions = {
         responsive: true,
         plugins: {
@@ -51,10 +54,11 @@ const StudentTasks_VisualFeedback = ({ data, taskId, onClose }) => {
         },
     };
 
-    // Function to handle saving the chart image
+    // function to handle saving the chart image to database
     const saveChartImage = async () => {
-        const chart = chartRef.current; // Access the chart instance directly
-        const imageBase64 = chart.toBase64Image(); // Convert chart to a base64-encoded image
+        // toBase64Image() for ChartJS learned from: https://quickchart.io/documentation/chart-js/image-export/
+        const chart = chartRef.current; // access the chart instance directly
+        const imageBase64 = chart.toBase64Image(); // convert chart to a base64-encoded image
         console.log(chart, taskId)
         try {
             // Update the 'task_completions' table with the visual feedback image
@@ -74,8 +78,8 @@ const StudentTasks_VisualFeedback = ({ data, taskId, onClose }) => {
     };
 
     const handleClose = () => {
-        saveChartImage(); // Save the chart before closing the popup
-        onClose(); // Close the popup
+        saveChartImage(); // save the chart before closing the popup
+        onClose();
     };
 
     return (

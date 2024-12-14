@@ -11,6 +11,7 @@ const StudentTasks_CompleteNewTask = ({ task, onClose, userId, onTaskComplete}) 
     const [showResultsPopup, setShowResultsPopup] = useState(false);
     const [submissionData, setSubmissionData] = useState([]);
 
+    //fetch the details of whatever task.id is given
     useEffect(() => {
         const fetchQuestions = async () => {
             const { data, error } = await supabase
@@ -30,12 +31,15 @@ const StudentTasks_CompleteNewTask = ({ task, onClose, userId, onTaskComplete}) 
         fetchQuestions();
     }, [task.id]);
 
+    // +value is a quick way to convert value into a number if it can be converted
+    // + is a Unary operator: https://stackoverflow.com/questions/59820643/when-to-use-or-number-with-string-numbers
     const handleScoreChange = (index, value) => {
-        if (value === '' || (!isNaN(value) && Number.isInteger(+value))) {
+        if (!isNaN(value) && Number.isInteger(+value)) {  // IS a num OR CAN be converted into a num
             setScores({ ...scores, [index]: value });
         }
     };
 
+    // check all values before submitting form
     const handleSubmit = async () => {
         setErrorMessage('');
 
@@ -47,23 +51,25 @@ const StudentTasks_CompleteNewTask = ({ task, onClose, userId, onTaskComplete}) 
                 setErrorMessage(`Please enter a score for Question ${i + 1}.`);
                 return;
             }
-
+            // if val entered cant be converted into number
             if (!Number.isInteger(+score)) {
                 setErrorMessage(`Score for Question ${i + 1} must be an integer.`);
                 return;
             }
-
+            // if num entered greater than full marks for that question (invalid)
             if (+score > fullMark) {
                 setErrorMessage(`Score for Question ${i + 1} cannot exceed ${fullMark}.`);
                 return;
             }
         }
 
+        // .map creates new submission structure with individual objects with the callback func
         const submission = questions.map((question, index) => ({
             question_id: question.id,
             score: +scores[index],
         }));
 
+        // insert new 'tasks_completion' record upon submission
         console.log('submitting...')
         const { error } = await supabase
             .from('task_completions') // Replace with your actual table name
@@ -78,7 +84,7 @@ const StudentTasks_CompleteNewTask = ({ task, onClose, userId, onTaskComplete}) 
             setErrorMessage('Failed to submit scores. Please try again.');
         } else {
             console.log('SUCCESSFUL SUBMISSION');
-            setSubmissionData(submission); // Set data for visualization
+            setSubmissionData(submission); // set data for visualization
             setShowResultsPopup(true); // Open the visual feedback popup
 
             onTaskComplete()
@@ -87,7 +93,7 @@ const StudentTasks_CompleteNewTask = ({ task, onClose, userId, onTaskComplete}) 
 
     const closeResultsPopup = () => {
         setShowResultsPopup(false);
-        onClose(task.id); // Pass the completed task ID to the parent component
+        onClose(task.id); // pass the completed task ID to the parent component
     };
     console.log("TEST1", submissionData, task.id)
 

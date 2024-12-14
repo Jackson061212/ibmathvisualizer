@@ -1,4 +1,4 @@
-/* General popup container and popup styling */
+/* general popup container and popup styling */
 .popup-container {
     position: fixed;
     top: 0;
@@ -72,7 +72,6 @@
     display: inline-block;
 }
 
-/* Score input container */
 .score-input-container {
     margin-top: 10px;
 }
@@ -87,7 +86,7 @@
 }
 
 .submit-button {
-    background-color: #28a745; /* Green */
+    background-color: #28a745;
     color: white;
     border: none;
     border-radius: 5px;
@@ -98,5 +97,5 @@
 }
 
 .submit-button:hover {
-    background-color: #218838; /* Darker green */
+    background-color: #218838;
 }

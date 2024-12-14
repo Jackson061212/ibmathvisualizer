@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { supabase } from '../../supabaseClient'; // Import Supabase client
-import "./TeacherLoggedHome_CreateNewTask.css"; // Add the provided styles to this CSS file
+import { supabase } from '../../supabaseClient';
+import "./TeacherLoggedHome_CreateNewTask.css";
 
 const TeacherLoggedHome_CreateNewTask = ({ isOpen, onClose, teacherId }) => { // Pass teacherId as a prop
     const [taskName, setTaskName] = useState('');
