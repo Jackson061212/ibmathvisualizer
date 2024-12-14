@@ -13,6 +13,7 @@ import TeacherLoggedHome from "./pages/teacher/TeacherLoggedHome";
 import TeacherTasks from "./pages/teacher/TeacherTasks";
 import StudentTasks from "./pages/student/StudentTasks";
 import TeacherStatistics from "./pages/teacher/TeacherStatistics"
+import StudentStatistics from "./pages/student/StudentStatistics"
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -81,6 +82,7 @@ function App() {
                 <Route path="/ibmathvisualizer/teacher-tasks" element={<TeacherTasks userId={userId} />} />
                 <Route path="/ibmathvisualizer/student-tasks" element={<StudentTasks userId={userId} />} />
                 <Route path="/ibmathvisualizer/teacher-statistics" element={<TeacherStatistics />} />
+                <Route path="/ibmathvisualizer/student-statistics" element={<StudentStatistics studentId={{userId}}/>} />
             </Routes>
         </BrowserRouter>
     );

@@ -43,6 +43,9 @@ const StudentTasks_CompleteNewTask = ({ task, onClose, userId, onTaskComplete}) 
     const handleSubmit = async () => {
         setErrorMessage('');
 
+        let totalMarksScored = 0;
+        let totalMaxMarks = 0;
+
         for (let i = 0; i < questions.length; i++) {
             const score = scores[i];
             const fullMark = questions[i].total_marks;
@@ -61,7 +64,12 @@ const StudentTasks_CompleteNewTask = ({ task, onClose, userId, onTaskComplete}) 
                 setErrorMessage(`Score for Question ${i + 1} cannot exceed ${fullMark}.`);
                 return;
             }
+            totalMarksScored += +score;
         }
+
+        // Calculate percentage accuracy
+        const percentageAccuracy = (totalMarksScored / task.total_marks) * 100;
+        console.log(totalMarksScored, percentageAccuracy)
 
         // .map creates new submission structure with individual objects with the callback func
         const submission = questions.map((question, index) => ({
@@ -77,6 +85,9 @@ const StudentTasks_CompleteNewTask = ({ task, onClose, userId, onTaskComplete}) 
                 task_id: task.id,
                 student_id: userId,
                 scores: submission,
+                total_marks_scored: totalMarksScored,
+                total_marks: task.total_marks,
+                percentage_accuracy: percentageAccuracy,
             });
 
         if (error) {
@@ -87,7 +98,7 @@ const StudentTasks_CompleteNewTask = ({ task, onClose, userId, onTaskComplete}) 
             setSubmissionData(submission); // set data for visualization
             setShowResultsPopup(true); // Open the visual feedback popup
 
-            onTaskComplete()
+            onTaskComplete();
         }
     };
 

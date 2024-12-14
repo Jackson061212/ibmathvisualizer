@@ -1,5 +1,5 @@
 import React from 'react';
-
+// unlogged in Home page
 const Home = () => {
     return (
         <div>

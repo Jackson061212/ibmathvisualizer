@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../supabaseClient';
-import './TeacherTasks.css'; // Ensure the CSS file is imported
+import './TeacherTasks.css';
 
 const TeacherTasks = () => {
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [sortType, setSortType] = useState('time'); // Default sorting by time
+    const [sortType, setSortType] = useState('time'); // default sorting by time
 
     useEffect(() => {
+        // fetch ALL tasks from 'tasks'
         const fetchTasks = async () => {
             const { data, error } = await supabase
                 .from('tasks')
@@ -16,7 +17,7 @@ const TeacherTasks = () => {
             if (error) {
                 console.error('Error fetching tasks:', error);
             } else {
-                // Fetch teacher names for each task
+                // fetch teacher names for each task using 'teacher_id'
                 const tasksWithTeacherNames = await Promise.all(
                     data.map(async (task) => {
                         if (task.teacher_id) {
@@ -28,12 +29,12 @@ const TeacherTasks = () => {
 
                             if (teacherError) {
                                 console.error('Error fetching teacher:', teacherError);
-                                return { ...task, teacher_name: 'Unknown' }; // Default to 'Unknown' if an error occurs
+                                return { ...task, teacher_name: 'Unknown' }; // default to 'Unknown' if an error occurs
                             }
 
                             return { ...task, teacher_name: teacherData?.name || 'Unknown' };
                         }
-                        return { ...task, teacher_name: 'Unknown' }; // Default to 'Unknown' if no teacher_id
+                        return { ...task, teacher_name: 'Unknown' }; // default to 'Unknown' if no teacher_id
                     })
                 );
 
@@ -45,7 +46,8 @@ const TeacherTasks = () => {
         fetchTasks();
     }, []);
 
-    // Sort tasks based on the selected sortType
+    // sort tasks based on the selected sortType
+    // explained in StudentTasks.js
     const sortedTasks = () => {
         if (sortType === 'time') {
             return tasks.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -63,7 +65,7 @@ const TeacherTasks = () => {
 
     return (
         <div className="teacher-tasks-container">
-            {/* Sorting buttons */}
+            {/* sorting buttons */}
             <div className="sorting-buttons">
                 <button
                     className={sortType === 'time' ? 'active' : ''}

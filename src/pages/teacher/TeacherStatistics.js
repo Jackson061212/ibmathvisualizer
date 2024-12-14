@@ -10,6 +10,8 @@ const TeacherStatistics = () => {
     const [sortType, setSortType] = useState('last_name');
 
     useEffect(() => {
+        // fetch ALL Students
+        // TODO: fetch only students that are registered under THIS Teacher ID
         const fetchStudents = async () => {
             const { data, error } = await supabase
                 .from('students')
@@ -22,10 +24,10 @@ const TeacherStatistics = () => {
                 setFilteredStudents(data);
             }
         };
-
         fetchStudents();
     }, []);
 
+    // sorting methods
     const handleSortChange = (type) => {
         setSortType(type);
         let sorted = [...filteredStudents];
@@ -39,6 +41,7 @@ const TeacherStatistics = () => {
         setFilteredStudents(sorted);
     };
 
+    // search students from a certain group
     const filterByGroup = (group) => {
         setGroupFilter(group);
         setFilteredStudents(

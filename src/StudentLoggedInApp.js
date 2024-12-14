@@ -29,7 +29,7 @@ const StudentLoggedInApp = ({ handleLogout }) => {
                 <div className="navbar-left">
                     <Link to="/ibmathvisualizer/student-logged-home" className="nav-button">Home</Link>
                     <Link to="/ibmathvisualizer/student-tasks" className="nav-button">Tasks</Link>
-                    <Link to="/ibmathvisualizer/statistics" className="nav-button">Statistics</Link>
+                    <Link to="/ibmathvisualizer/student-statistics" className="nav-button">Statistics</Link>
                 </div>
                 <div className="navbar-right">
                     <button onClick={showLogoutPopup} className="nav-button">Logout</button>  {/* show confirmation popup */}

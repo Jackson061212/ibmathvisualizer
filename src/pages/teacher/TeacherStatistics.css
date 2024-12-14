@@ -1,16 +1,16 @@
-/* Table container styling */
+
 .student-table {
     width: 100%;
-    border-collapse: collapse; /* Merge borders for a cleaner look */
+    border-collapse: collapse; /* merge borders for a cleaner look. Suggested by ChatGPT */
     margin: 0 auto;
     font-size: 14px;
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: hidden;  /* overspilled content will be hidden*/
 }
 
-/* Table header styling */
+/* table header style*/
 .student-table thead th {
     background-color: #f5f5f5;
     font-weight: bold;
@@ -19,13 +19,13 @@
     border-bottom: 2px solid #ddd;
 }
 
-/* Table row styling */
 .student-table tbody tr {
     border-bottom: 1px solid #eee;
     transition: background-color 0.2s ease;
 }
 
-/* Alternating row shading */
+/* alternating row shading */
+/* suggested by ChatGPT */
 .student-table tbody tr:nth-child(odd) {
     background-color: #f9f9f9;
 }
@@ -34,23 +34,22 @@
     background-color: #ffffff;
 }
 
-/* Hover effect for rows */
 .student-table tbody tr:hover {
     background-color: #f1f1f1;
 }
 
-/* Table cell styling */
+/* table cell styling */
 .student-table td {
     padding: 10px;
     text-align: left;
-    white-space: nowrap; /* Prevent wrapping */
+    white-space: nowrap; /* no line break. single line */
     overflow: hidden;
     text-overflow: ellipsis; /* Add ellipsis for long text */
 }
 
-/* Index column styling */
+/* index column styling */
 .student-table .index-cell {
     text-align: center;
     font-weight: bold;
-    width: 50px; /* Fixed width for the index column */
+    width: 50px; /* fixed width for the index column */
 }
