@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { supabase } from '../supabaseClient';
-import bcrypt from 'bcryptjs';  // Import bcryptjs for hashing passwords
+import bcrypt from 'bcryptjs';  // bcryptjs for hashing passwords
 import { student_code } from '../passcodes';
-import { Link, useNavigate } from "react-router-dom";  // Import the student code
-import './SignupStudent.css'; // Add custom CSS file for styling
-import logo from '../images/white_logo.jpg'; // Path to the logo image
+import { Link, useNavigate } from "react-router-dom";  // import student code
+import './SignupStudent.css';
+import logo from '../images/white_logo.jpg';
 
 const SignupStudent = () => {
     const [email, setEmail] = useState('');
@@ -13,29 +13,50 @@ const SignupStudent = () => {
     const [englishName, setEnglishName] = useState('');
     const [lastName, setLastName] = useState('');
     const [group, setGroup] = useState('DP1 AA HL');  // Default group
-    const [subjectTeacher, setSubjectTeacher] = useState('Mr. Vega');  // Default subject teacher
-    const [enteredStudentCode, setEnteredStudentCode] = useState('');  // Student code input
+    const [subjectTeacher, setSubjectTeacher] = useState('Mr. Vega');  // default subject teacher
+    const [enteredStudentCode, setEnteredStudentCode] = useState('');  // student code input
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {
         e.preventDefault();
 
-        // Check if the entered student code matches the predefined code
+        // check if the entered student code matches the predefined code
         if (enteredStudentCode !== student_code) {
             alert('Invalid student code. Please try again.');
             return;
         }
-
+        // double check password
         if (password !== confirmPassword) {
             alert('Passwords do not match.');
             return;
         }
 
+        // check if the email exists in either 'students' or 'teachers' tables
+        const { data: studentData, error: studentError } = await supabase
+            .from('students')
+            .select('email')
+            .eq('email', email)
+            .single();
+
+        const { data: teacherData, error: teacherError } = await supabase
+            .from('teachers')
+            .select('email')
+            .eq('email', email)
+            .single();
+
+        // if already exist in either, email is taken. need to change email
+        if (studentData || teacherData) {
+            alert('This email is already registered as a student or teacher.');
+            return;
+        }
+
+
         try {
-            // Hash the password before saving it
+            // hash the password before saving it
+            // Learned from: https://blog.logrocket.com/password-hashing-node-js-bcrypt/
             const hashedPassword = await bcrypt.hash(password, 10);
 
-            // Insert the student into the 'students' table with the hashed password
+            // insert the student into the 'students' table w/ hashed password
             const { data, error } = await supabase
                 .from('students')
                 .insert([
@@ -63,6 +84,7 @@ const SignupStudent = () => {
     return (
         <div className="signup-container">
             <form className="signup-form" onSubmit={handleSignup}>
+                {/* WHENEVER presses Signup for Signup-form, handleSignup is called */}
                 <img src={logo} alt="IB Math Visualizer Logo" className="logo" />
                 <h2>Student Signup</h2>
                 <div className="form-group">

@@ -1,0 +1,69 @@
+begin CreateNewTask
+    popup
+        DISPLAY close button
+        form
+            DISPLAY input box 'Task Name'
+            DISPLAY input box 'Teacher Name'
+            for each question in questions
+                DISPLAY questionNumber
+                DISPLAY input box 'Total Marks'
+                DISPLAY dropdown 'Tags'
+                DISPLAY button 'Delete Question'
+                if 'Delete Question'
+                    CREATE new list newQuestions without index-th question
+                    UPDATE question numbers
+                    UPDATE questions to newQuestions
+                end if
+            end for
+            DISPLAY button 'Add Question'
+            if 'Add Question'
+                CREATE new question with questionNumber = len(questions)+1
+                ADD the new question to questions
+            end if
+            DISPLAY button 'Create Task'
+            if 'Create Task'
+                if form_complete AND inputs_valid
+                    SAVE questions
+                    end popup
+                else
+                    REDIRECT to invalid input box
+                end if
+            end if
+        end form
+    end popup
+end
+
+
+
+
+
+begin CompleteNewTask
+    popup
+        DISPLAY close button
+        form
+            DISPLAY task name
+            for each question in questions
+                DISPLAY questionNumber
+                DISPLAY tags
+                DISPLAY input box 'Total Marks Deducted'
+                DISPLAY checkbox 'Miscalculations'
+                if 'Miscalculations'
+                    DISPLAY input box for 'Marks Lost to Miscalculations'
+                end if
+                DISPLAY checkbox 'Sig Figs'
+                if 'Sig Figs'
+                    DISPLAY input box for 'Marks Lost to Incorrect Sig Figs'
+                end if
+            end for
+            DISPLAY button 'Submit Task'
+            if 'Submit Task'
+                if form_complete AND inputs_valid
+                    SAVE answers
+                    end popup
+                else
+                    REDIRECT to invalid input box
+                end if
+            end if
+        end form
+    end popup
+end

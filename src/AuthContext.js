@@ -1,15 +1,13 @@
 
 import { createContext, useState, useContext } from 'react';
+const AuthContext = createContext(null); // auth contxt
 
-// Create a context for authentication
-const AuthContext = createContext(null);
-
-// Provide the AuthContext to children components
+// THE FOLLOWING CODE IS PROVIDED BY https://reactjs.org/docs/hooks-reference.html#usecontext
 export const AuthProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Initialize login state
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const login = () => setIsLoggedIn(true); // Function to log in
-    const logout = () => setIsLoggedIn(false); // Function to log out
+    const login = () => setIsLoggedIn(true); //log in function
+    const logout = () => setIsLoggedIn(false);
 
     return (
         <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
@@ -17,8 +15,6 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
-
-// Custom hook to use the AuthContext in other components
 export const useAuth = () => {
     return useContext(AuthContext);
 };

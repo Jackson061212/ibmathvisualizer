@@ -1,66 +1,102 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';  // define variable and functions
 import { supabase } from '../supabaseClient';
 import { Link, useNavigate } from 'react-router-dom';
-import bcrypt from 'bcryptjs';  // Import bcrypt for password comparison
-import './Login.css'; // Custom CSS file for styling
-import logo from '../images/white_logo.jpg'; // Path to the logo image
+import bcrypt from 'bcryptjs';  // import bcrypt for password comparison
+import './Login.css'; // link to css
+import logo from '../images/white_logo.jpg'; // path to logo image
 
-
-const Login = ({ onLogin }) => {  // Accept onLogin prop from App.js
-    const [email, setEmail] = useState('');
+const Login = ({ onLogin }) => {  // onLogin function App.js-->LoggedOutApp.js-->Login.js
+    const [email, setEmail] = useState('');   // way of defining varaibles in js
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    // Check for verification token in the URL
-    useEffect(() => {
-        const checkForVerificationToken = async () => {
-            const url = new URL(window.location.href);
-            const access_token = url.searchParams.get('access_token');
+    // CODE BY SUPABASE DOCUMENTATION: check for verification token in the URL
+    // IN CASE OF USING EMAIL-AUTH, use this code
+    // useEffect(() => {
+    //     const checkForVerificationToken = async () => {
+    //         const url = new URL(window.location.href);
+    //         const access_token = url.searchParams.get('access_token');
+    //
+    //         if (access_token) {
+    //             const { error } = await supabase.auth.verifyOtp({
+    //                 token: access_token,
+    //                 type: 'email',
+    //             });
+    //
+    //             if (error) {
+    //                 alert('Email verification failed: ' + error.message);
+    //             } else {
+    //                 alert('Email verified successfully!');
+    //                 navigate('/ibmathvisualizer');  // redirect to home or dashboard after verification
+    //             }
+    //         }
+    //     };
+    //
+    //     checkForVerificationToken();
+    // }, [navigate]);
 
-            if (access_token) {
-                const { error } = await supabase.auth.verifyOtp({
-                    token: access_token,
-                    type: 'email',
-                });
-
-                if (error) {
-                    alert('Email verification failed: ' + error.message);
-                } else {
-                    alert('Email verified successfully!');
-                    navigate('/ibmathvisualizer');  // Redirect to home or dashboard after verification
-                }
-            }
-        };
-
-        checkForVerificationToken();
-    }, [navigate]);
-
-    // Custom login function using bcrypt password verification
+    // CUSTOM LOGIN SYSTEM: if user in 'students' table in supabase, login as student
+    //                      if user in 'teachers' table in supabase, login as teacheer
     const handleLogin = async (e) => {
+        // Default submission behavior (clicking submit button) is REFRESH ENTIRE PAGE
+        // But I want no page-reloads (that will logout user) so preventDefault()
         e.preventDefault();
 
         try {
-            // Fetch the student's hashed password from the 'students' table based on email
-            const { data, error } = await supabase
+            let userData = null;
+            let table = null;
+
+            // check if the email exists in the 'students' table
+            // TYPICAL 'SELECT' METHOD PROVIDED BY SUPABASE API
+            const { data: studentData, error: studentError } = await supabase
                 .from('students')
-                .select('password')  // Select the password column
+                .select('*')
                 .eq('email', email)
-                .single();  // Get a single result (unique user)
+                .single();   // in case multiple (which shouldnrt happen)
 
-            if (error) {
-                alert('Invalid login credentials.');
-                return;
+            if (studentData) {
+                userData = studentData;
+                table = 'students';
+            } else if (studentError) {
+                // if no student was found, check the 'teachers' table
+                const { data: teacherData, error: teacherError } = await supabase
+                    .from('teachers')
+                    .select('*')
+                    .eq('email', email)
+                    .single();
+
+                if (teacherData) {
+                    userData = teacherData;
+                    table = 'teachers';
+                } else if (teacherError) {
+                    // if no match in either table
+                    alert('Invalid login credentials.');
+                    return;
+                }
             }
+            console.log('USERDATA ', userData, table)
 
-            // Verify the entered password against the hashed password from the database
-            const passwordMatch = await bcrypt.compare(password, data.password);
+            // verify the password against the hashed password from the database
+            // Bcrypt was recommended by ChatGPT
+            // Learned bcrypt.compare from: https://dev.to/mbugua70/how-to-use-bcrypt-for-password-hashing-in-nodejs-1l7e
+            if (userData) {
+                const passwordMatch = await bcrypt.compare(password, userData.password);
 
-            if (passwordMatch) {
-                alert('Login successful!');
-                onLogin();  // Call onLogin to change the app state to logged in
-                navigate('/ibmathvisualizer/logged-home'); // Redirect to the logged-in home page
-            } else {
-                alert('Invalid login credentials.');
+                if (passwordMatch) {
+                    alert('Login successful!');
+                    const userId = userData.id; // get user id
+                    // console.log('HELLOOOOOOO ', userId)
+                    onLogin(table, userId); // pass role & id ('student' or 'teacher')
+                    // console.log('login onlogin', userId)
+
+                    if (table === 'students') {
+                        navigate('/ibmathvisualizer/student-logged-home');  // redirect to logged-in home for students
+                    } else {
+                        navigate('/ibmathvisualizer/teacher-logged-home');  // for teachers
+                    }
+                } else {
+                    alert('Invalid login credentials.');
+                }
             }
         } catch (err) {
             console.error('Error during login:', err);
@@ -70,12 +106,11 @@ const Login = ({ onLogin }) => {  // Accept onLogin prop from App.js
 
     return (
         <div className="login-container">
-
             <form className="login-form" onSubmit={handleLogin}>
                 <img src={logo} alt="IB Math Visualizer Logo" className="logo" />
                 <h2>Login</h2>
                 <div className="form-group">
-                    <input
+                    <input       // input field, onChange() dynamically updates email variable
                         type="email"
                         placeholder="Email"
                         onChange={(e) => setEmail(e.target.value)}

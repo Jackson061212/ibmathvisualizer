@@ -1,37 +1,90 @@
-/* Container for the navigation bar */
+/* container for the navigation bar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #00AA99;  /* Soft background color */
-    border-bottom: 2px solid #ccc; /* Optional bottom border */
+    background-color: #00AA99;
+    border-bottom: 2px solid #ccc;
 }
 
-/* Left-aligned navigation item (Home button) */
 .navbar-left {
     display: flex;
     justify-content: flex-start;
 }
 
-/* Right-aligned navigation item (Login/Register button) */
 .navbar-right {
     display: flex;
     justify-content: flex-end;
 }
 
-/* Common styling for nav buttons */
 .nav-button {
-    background-color: #007777; /* Initial button color */
+    background-color: #007777;
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s ease;  /* Smooth hover effect */
+    transition: background-color 0.3s ease;  /* smooth hover effect */
 }
 
-/* Hover effect for nav buttons (darker shade) */
+/* hover effect for nav buttons (darker shade) */
 .nav-button:hover {
-    background-color: #004d4d;  /* Darker color on hover */
+    background-color: #004d4d;  /* darker color on hover */
+}
+
+/* popup container styles */
+.popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* half transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;  /*larger z-index mean higher priority (show in front)*/
+}
+
+/* popup box styles */
+.popup {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* logout button in red */
+.popup-logout-button {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* cancel button */
+.popup-cancel-button {
+    background-color: #ccc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* hover effect for logout button */
+.popup-logout-button:hover {
+    background-color: #cc0000;
+}
+
+/* Hover effect for cancel button */
+.popup-cancel-button:hover {
+    background-color: #999;
 }

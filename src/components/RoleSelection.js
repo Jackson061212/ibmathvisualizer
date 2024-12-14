@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import './RoleSelection.css'; // Import custom CSS file
-import studentImg from '../images/student.webp'; // Example student image
-import teacherImg from '../images/teacher.webp'; // Example teacher image
+import './RoleSelection.css';
+import studentImg from '../images/student.webp'; // student icon
+import teacherImg from '../images/teacher.webp';
 
 const RoleSelection = () => {
     return (
