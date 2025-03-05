@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/ibmathvisualizer/static/css/main.e4a40e1d.css",
-    "main.js": "/ibmathvisualizer/static/js/main.339a8986.js",
+    "main.js": "/ibmathvisualizer/static/js/main.2a0b0081.js",
     "static/js/198.7f9b6281.chunk.js": "/ibmathvisualizer/static/js/198.7f9b6281.chunk.js",
     "static/media/teacher.webp": "/ibmathvisualizer/static/media/teacher.65f07fec5585d777e483.webp",
     "static/media/white_logo.jpg": "/ibmathvisualizer/static/media/white_logo.6167c4a475384009ab14.jpg",
     "static/media/student.webp": "/ibmathvisualizer/static/media/student.adc717a723eba6af0196.webp",
     "index.html": "/ibmathvisualizer/index.html",
     "main.e4a40e1d.css.map": "/ibmathvisualizer/static/css/main.e4a40e1d.css.map",
-    "main.339a8986.js.map": "/ibmathvisualizer/static/js/main.339a8986.js.map",
+    "main.2a0b0081.js.map": "/ibmathvisualizer/static/js/main.2a0b0081.js.map",
     "198.7f9b6281.chunk.js.map": "/ibmathvisualizer/static/js/198.7f9b6281.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e4a40e1d.css",
-    "static/js/main.339a8986.js"
+    "static/js/main.2a0b0081.js"
   ]
 }
