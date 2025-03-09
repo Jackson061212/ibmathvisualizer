@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/ibmathvisualizer/static/css/main.e4a40e1d.css",
-    "main.js": "/ibmathvisualizer/static/js/main.2a0b0081.js",
+    "main.css": "/ibmathvisualizer/static/css/main.c40dcd7b.css",
+    "main.js": "/ibmathvisualizer/static/js/main.bc7e5adc.js",
     "static/js/198.7f9b6281.chunk.js": "/ibmathvisualizer/static/js/198.7f9b6281.chunk.js",
     "static/media/teacher.webp": "/ibmathvisualizer/static/media/teacher.65f07fec5585d777e483.webp",
     "static/media/white_logo.jpg": "/ibmathvisualizer/static/media/white_logo.6167c4a475384009ab14.jpg",
     "static/media/student.webp": "/ibmathvisualizer/static/media/student.adc717a723eba6af0196.webp",
     "index.html": "/ibmathvisualizer/index.html",
-    "main.e4a40e1d.css.map": "/ibmathvisualizer/static/css/main.e4a40e1d.css.map",
-    "main.2a0b0081.js.map": "/ibmathvisualizer/static/js/main.2a0b0081.js.map",
+    "main.c40dcd7b.css.map": "/ibmathvisualizer/static/css/main.c40dcd7b.css.map",
+    "main.bc7e5adc.js.map": "/ibmathvisualizer/static/js/main.bc7e5adc.js.map",
     "198.7f9b6281.chunk.js.map": "/ibmathvisualizer/static/js/198.7f9b6281.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e4a40e1d.css",
-    "static/js/main.2a0b0081.js"
+    "static/css/main.c40dcd7b.css",
+    "static/js/main.bc7e5adc.js"
   ]
 }
